@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>For Ishika 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: linear-gradient(160deg, #ffe0ef 0%, #fff0f8 50%, #ffeaf6 100%);
+    font-family: 'Nunito', sans-serif;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Floating hearts */
+  .heart-float {
+    position: fixed;
+    pointer-events: none;
+    z-index: 0;
+    font-size: 1.4rem;
+    opacity: 0.18;
+    animation: floatUp linear infinite;
+  }
+  @keyframes floatUp {
+    0%   { transform: translateY(110vh) rotate(0deg); opacity: 0.18; }
+    100% { transform: translateY(-10vh) rotate(25deg); opacity: 0; }
+  }
+
+  /* ---- CARD ---- */
+  .card {
+    position: relative;
+    z-index: 10;
+    background: #fff;
+    border-radius: 32px;
+    padding: 40px 36px 44px;
+    text-align: center;
+    box-shadow: 0 0 0 5px #ffb3cf, 0 20px 60px rgba(255,80,140,.2);
+    width: min(90vw, 460px);
+    animation: cardPop .6s cubic-bezier(.34,1.56,.64,1) both;
+  }
+  @keyframes cardPop {
+    from { transform: scale(.5) rotate(-5deg); opacity: 0; }
+    to   { transform: scale(1) rotate(0deg);  opacity: 1; }
+  }
+
+  .bear {
+    font-size: 4.5rem;
+    display: block;
+    margin-bottom: 10px;
+    animation: bearBounce 1.4s ease-in-out infinite;
+  }
+  @keyframes bearBounce {
+    0%,100% { transform: translateY(0) rotate(0deg); }
+    50%      { transform: translateY(-10px) rotate(4deg); }
+  }
+
+  h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(1.5rem, 6vw, 2.1rem);
+    color: #e0457b;
+    margin-bottom: 6px;
+  }
+  h1 span { color: #ff3366; }
+
+  .sub {
+    font-size: .95rem;
+    color: #b06080;
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+
+  .question-box {
+    background: linear-gradient(135deg,#fff0f8,#ffe8f5);
+    border-radius: 18px;
+    padding: 18px 20px;
+    margin-bottom: 30px;
+  }
+  .question-box p {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #c0406b;
+    line-height: 1.6;
+  }
+  .question-box .big {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(1.4rem, 5vw, 1.8rem);
+    color: #ff3366;
+  }
+
+  /* YES button */
+  #btnYes {
+    display: inline-block;
+    background: linear-gradient(135deg, #ff6b9d, #e0457b);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 16px 48px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(255,80,140,.4);
+    -webkit-appearance: none;
+    touch-action: manipulation;
+  }
+  #btnYes:active { transform: scale(.95); }
+
+  .hint {
+    font-size: .78rem;
+    color: #e0a0b5;
+    margin-top: 14px;
+    font-style: italic;
+  }
+
+  /* ---- NO button (fixed, runs away) ---- */
+  #btnNo {
+    position: fixed;
+    z-index: 9999;
+    background: #f3f3f3;
+    color: #aaa;
+    border: 2.5px dashed #ccc;
+    border-radius: 50px;
+    padding: 14px 36px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 900;
+    cursor: not-allowed;
+    user-select: none;
+    touch-action: none;
+    /* NO transition — instant jump on mobile so it actually escapes */
+    left: 60vw;
+    top: 75vh;
+  }
+
+  /* ---- YES SCREEN ---- */
+  #yesScreen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    animation: fadeIn .5s ease both;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(.8); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+  #yesScreen .big-heart { font-size: 5rem; animation: bearBounce 1s ease-in-out infinite; }
+  #yesScreen h2 {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(1.8rem, 7vw, 2.4rem);
+    color: #ff3366;
+  }
+  #yesScreen p { font-size: 1rem; color: #b06080; font-weight: 700; line-height: 1.6; }
+  #yesScreen .emojis { font-size: 2.2rem; margin: 4px 0; letter-spacing: 4px; }
+
+  /* Confetti */
+  .confetti-piece {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    border-radius: 2px;
+    animation: confettiFall linear forwards;
+  }
+  @keyframes confettiFall {
+    0%   { transform: translateY(-20px) rotate(0deg);   opacity: 1; }
+    100% { transform: translateY(105vh) rotate(720deg); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- No button -->
+<button id="btnNo">No 🙈</button>
+
+<!-- Main card -->
+<div class="card" id="card">
+
+  <div id="askSection">
+    <span class="bear">🐻</span>
+    <h1>Hey <span>Ishika</span>! 💖</h1>
+    <p class="sub">I have a very important question…</p>
+    <div class="question-box">
+      <p>Will you be my<br><span class="big">Valentine? 💝</span></p>
+    </div>
+    <button id="btnYes">Yes! 💗</button>
+    <p class="hint">Try clicking "No"… if you can! 😏</p>
+  </div>
+
+  <div id="yesScreen">
+    <span class="big-heart">🥰</span>
+    <h2>Yay!! 🎉</h2>
+    <p>I knew you'd say yes,<br><strong>Ishika!</strong> 💖</p>
+    <div class="emojis">💕✨🌹✨💕</div>
+    <p style="max-width:260px;">You just made me the happiest person ever! 🐻❤️</p>
+  </div>
+
+</div>
+
+<script>
+// ── Floating hearts ──────────────────────────────────
+const chars = ['💖','💗','💝','💓','🌸','✨','💞','🌷','🥰'];
+for (let i = 0; i < 22; i++) {
+  const s = document.createElement('span');
+  s.className = 'heart-float';
+  s.textContent = chars[i % chars.length];
+  s.style.left = Math.random()*100 + 'vw';
+  s.style.animationDuration = (6 + Math.random()*8) + 's';
+  s.style.animationDelay = (-Math.random()*10) + 's';
+  s.style.fontSize = (1 + Math.random()*1.2) + 'rem';
+  document.body.appendChild(s);
+}
+
+// ── No button flee logic ──────────────────────────────
+const btnNo = document.getElementById('btnNo');
+
+function fleeFrom(cx, cy) {
+  const r = btnNo.getBoundingClientRect();
+  const bx = r.left + r.width  / 2;
+  const by = r.top  + r.height / 2;
+  const dx = bx - cx;
+  const dy = by - cy;
+  const dist = Math.sqrt(dx*dx + dy*dy);
+  // large detection zone — works for fat fingers
+  const zone = Math.min(window.innerWidth, window.innerHeight) * 0.55;
+
+  if (dist < zone) {
+    const angle = Math.atan2(dy, dx);
+    const flee  = zone;
+    let nx = bx + Math.cos(angle) * flee - r.width  / 2;
+    let ny = by + Math.sin(angle) * flee - r.height / 2;
+    // clamp inside screen with padding
+    nx = Math.max(8, Math.min(window.innerWidth  - r.width  - 8, nx));
+    ny = Math.max(8, Math.min(window.innerHeight - r.height - 8, ny));
+    btnNo.style.left = nx + 'px';
+    btnNo.style.top  = ny + 'px';
+  }
+}
+
+// Mouse events
+document.addEventListener('mousemove', e => fleeFrom(e.clientX, e.clientY));
+
+// Touch events — prevent scroll while chasing
+document.addEventListener('touchmove', e => {
+  e.preventDefault();
+  const t = e.touches[0];
+  fleeFrom(t.clientX, t.clientY);
+}, { passive: false });
+
+document.addEventListener('touchstart', e => {
+  const t = e.touches[0];
+  fleeFrom(t.clientX, t.clientY);
+}, { passive: true });
+
+// If somehow the button itself gets touched, flee immediately
+btnNo.addEventListener('touchstart', e => {
+  e.preventDefault();
+  e.stopPropagation();
+  const t = e.touches[0];
+  // Jump to a random corner far away
+  const corners = [
+    [8, 8],
+    [window.innerWidth - btnNo.offsetWidth - 8, 8],
+    [8, window.innerHeight - btnNo.offsetHeight - 8],
+    [window.innerWidth - btnNo.offsetWidth - 8, window.innerHeight - btnNo.offsetHeight - 8]
+  ];
+  const pick = corners[Math.floor(Math.random() * corners.length)];
+  btnNo.style.left = pick[0] + 'px';
+  btnNo.style.top  = pick[1] + 'px';
+}, { passive: false });
+
+btnNo.addEventListener('click', e => e.preventDefault());
+
+// ── Yes button ────────────────────────────────────────
+function showYes() {
+  document.getElementById('askSection').style.display = 'none';
+  const ys = document.getElementById('yesScreen');
+  ys.style.display = 'flex';
+  btnNo.style.display = 'none';
+  launchConfetti();
+}
+
+const yesBtn = document.getElementById('btnYes');
+yesBtn.addEventListener('click', showYes);
+yesBtn.addEventListener('touchend', e => {
+  e.preventDefault();
+  showYes();
+});
+
+// ── Confetti ──────────────────────────────────────────
+function launchConfetti() {
+  const colors = ['#ff6b9d','#ff3366','#ffe066','#66d9e8','#b197fc','#ff8787','#a9e34b','#ffa94d'];
+  for (let i = 0; i < 100; i++) {
+    setTimeout(() => {
+      const c = document.createElement('div');
+      c.className = 'confetti-piece';
+      const size = 6 + Math.random() * 10;
+      c.style.left   = (5 + Math.random()*90) + 'vw';
+      c.style.top    = '-15px';
+      c.style.width  = size + 'px';
+      c.style.height = size + 'px';
+      c.style.background = colors[Math.floor(Math.random()*colors.length)];
+      c.style.borderRadius = Math.random() > .5 ? '50%' : '3px';
+      c.style.animationDuration = (1.5 + Math.random()*2.5) + 's';
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), 5000);
+    }, i * 20);
+  }
+}
+</script>
+</body>
+</html>
